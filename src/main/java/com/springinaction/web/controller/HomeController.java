@@ -37,14 +37,14 @@ public class HomeController {
     
     
     
-    @RequestMapping(value={"", "/", "/homee"}, method= RequestMethod.GET)
+    @RequestMapping(value={"", "/", "/home"}, method= RequestMethod.GET)
     public String showHomePage(Map<String, Object> model) {
         System.out.println("home");
         
         List<Stock> stocks = stockService.getAll();        
         model.put("stocks", stocks);
         
-        return "homee";
+        return "home";
     }
     
     @RequestMapping(value = "/test", method = RequestMethod.GET)

@@ -11,7 +11,7 @@
         <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
     </definition>
     
-    <definition name="homee" extends="template">
+    <definition name="home" extends="template">
         <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
     </definition>
     
