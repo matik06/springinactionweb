@@ -15,4 +15,8 @@
         <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
     </definition>
     
+    <definition name="test" extends="template">
+        <put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
+    </definition>
+    
 </tiles-definitions>
