@@ -4,10 +4,12 @@
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:aop="http://www.springframework.org/schema/aop"       
     xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    
+    xmlns:flow="http://www.springframework.org/schema/webflow-config"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         
@@ -24,8 +26,52 @@
         http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
         
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        
+        http://www.springframework.org/schema/webflow-config
+        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd"
         >
+            
+    <!-- webflow -->
+    
+    <!-- obiekt odpowiedzialny za tworzenie i przebieg przepływu -->
+    <flow:flow-executor id="flowExecutor" flow-registry="flowRegistry" />
+    <!-- obiekt odpowiedzialny za wczytanie definicji przepływu i przekazanie ich do flowExecutor -->
+    <flow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
+        <!-- /WEB-INF/flows/order/order-flow.xml
+            /WEB-INF/flows/ - Flow registry base path
+            order - Flow id
+            order-flow.xml - Flow definition-->
+        <flow:flow-location-pattern value="*-flow.xml" />
+        <!-- tutaj bezpośrednio podaliśmy lokalizację pliku, Flow id = springpizza -->
+        <flow:flow-location path="/WEB-INF/flows/springpizza.xml" id="springpizza"/>
+    </flow:flow-registry>
+    
+    
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry" />
+    </bean>     
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor" />
+    </bean>
+    
+    <!-- 
+        States - points in flow when something happens (for example: page is presented to the user)
+            Action - states are where the logic of a flow takes place
+            Decision - states branch the flow in two direction, routing the flow based on the outcome of evaluation flow data
+            End - The end state is the last stop for a flow. Once a flow has reached its end state, the flow is terminated
+            Subflow - A subflow state starts a new flow within the context of a flow that is already underway
+            View - A view state pauses the flow and invites the user to participate in the flow
+        
+        
+        Transitions - if flow states are like the points on a map where you might stop during a road trip, then transitions
+        are the roads that connect thoso points. In flow you get from one point to another by way of a transition
+        
+        data - 
+        
+    -->
+       
+       
        
      <!-- email -->
     

@@ -20,6 +20,7 @@
         <junit.version>4.10</junit.version>
         <mockito-core.version>1.9.0</mockito-core.version>
         <spring.version>3.1.1.RELEASE</spring.version>
+        <spring.webflow>2.3.1.RELEASE</spring.webflow>
         <cglib.version>2.2.2</cglib.version>
         <mysql-connector.version>5.1.18</mysql-connector.version>
         <hibernate.version>3.6.8.Final</hibernate.version>
@@ -34,8 +35,35 @@
     </properties>
   
 
-  <dependencies>
+    <dependencies>
       
+      <!-- Spring 3 Web Flow dependencies -->                
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-webflow</artifactId>
+            <version>${spring.webflow}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-binding</artifactId>
+            <version>${spring.webflow}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-faces</artifactId>
+            <version>${spring.webflow}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-js</artifactId>
+            <version>${spring.webflow}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-js-resources</artifactId>
+            <version>${spring.webflow}</version>
+        </dependency>
+        
     <dependency>
         <groupId>javax.mail</groupId>
         <artifactId>mail</artifactId>
