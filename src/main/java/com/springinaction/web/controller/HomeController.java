@@ -5,11 +5,12 @@
 package com.springinaction.web.controller;
 
 
+import com.springinaction.web.mailservice.MailService;
 import com.springinaction.web.model.Stock;
 import com.springinaction.web.service.StockService;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,12 @@ public class HomeController {
     
 //    @Autowired
     private StockService stockService;
+    
+//    @Autowired
+//    private MailSender mailSender;
+    
+    @Autowired
+    MailService mailService;
 
     public HomeController() {
     }
@@ -44,8 +51,21 @@ public class HomeController {
     public String showHomePage(Model model) {
         System.out.println("home");
         
-        List<Stock> stocks = stockService.getAll();        
-        model.addAttribute("stocks", stocks);
+//        List<Stock> stocks = stockService.getAll();        
+//        model.addAttribute("stocks", stocks);
+        
+//        SimpleMailMessage mailMessage = new SimpleMailMessage();
+//        mailMessage.setTo("matik06@gmail.com");
+//        mailMessage.setSubject("testowanie wysyłania maili");
+//        mailMessage.setText("treść testowego maila");
+//        mailMessage.setFrom("m.lubanskii@gmail.com");
+//        
+//        mailSender.send(mailMessage);
+        
+        mailService.sendMail("it.helpdesk.system@gmail.com", "m.lubanskii@gmail.com", "tytul wiadomosci", "treść");
+        mailService.sendMail("matik06@gmail.com", "m.lubanskii@gmail.com", "tytul wiadomości żąłóńćźę", "treść");
+        
+        System.out.println("to będzie test !!!!!!!!!!!!!!!!!!!!");
         
         return "home";
     }
